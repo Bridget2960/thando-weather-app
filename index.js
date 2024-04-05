@@ -51,10 +51,38 @@ function refreshWeather(response) {
   
   searchCity(searchInput.value);
   }
+  function displayForecast() {
+    let forecastElement = document.querySelector("#forecast");
+
+let days = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+let forecastHTML = "";
+days.forEach(function (day) {
+  forecastHTML = 
+  forecastHTML +
+   `
+    <div class="weather-forecast">
+  <div class="row">
+    <div class="col-1">
+      <div class="weather-forecast-date">${day}</div>
+      <img src="https://shecodes-assets.s3.amazonaws.com/api/weather/icons/mist-day.png" alt=""
+      width="42"/>
+      <div class="weather-forecast-temperatures">
+        <span class="weather-temperature-max">19°</span>
+        <span class="weather-forecast-min">12°</span>
+      </div>
+    </div>
+  </div>
+</div>
+  `;
+});
+forecastElement.innerHTML = forecastHTML;
+  } 
   
   let searchFormElement = document.querySelector("#search-form");
   searchFormElement.addEventListener("submit", handleSearchSubmit);
   
   searchCity("Paris");
+
+  displayForecast();
   
    
