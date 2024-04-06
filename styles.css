@@ -109,6 +109,7 @@ display:inline-block;
 .weather-forecast-date {
   padding-bottom: 50px;
   padding-left: 20px;
+  padding-right: 40px;
 }
 .weather-forecast-min {
   opacity: 0.4;
