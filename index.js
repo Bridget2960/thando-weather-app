@@ -53,6 +53,12 @@ function refreshWeather(response) {
   
   searchCity(searchInput.value);
   }
+  function formatDay(timetamp) {
+    let date = new Date(timetamp * 1000);
+    let days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+
+    return days[date.getDay()];
+  }
 
 function getForecast(city) {
   let apiKey = "60c377e4e650occabef4t8de34f34e59";
@@ -62,29 +68,30 @@ function getForecast(city) {
 
 
   function displayForecast(response) {
-    let forecastElement = document.querySelector("#forecast");
+    
 
-let days = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+
 let forecastHTML = "";
-days.forEach(function (day) {
+response.data.daily.forEach(function (day, index) {
+  if (index < 5) {
   forecastHTML = 
   forecastHTML +
    `
     <div class="weather-forecast">
   <div class="row">
     <div class="col-1">
-      <div class="weather-forecast-date">${day}</div>
-      <img src="https://shecodes-assets.s3.amazonaws.com/api/weather/icons/mist-day.png" alt=""
-      width="42"/>
+      <div class="weather-forecast-date">${formatDay(day.time)}</div>
       <div class="weather-forecast-temperatures">
-        <span class="weather-temperature-max">19°</span>
-        <span class="weather-forecast-min">12°</span>
+        <span class="weather-temperature-max">${Math.round(day.temperature.maximum)}°</span>
+        <span class="weather-forecast-min">${Math.round(day.temperature.minimum)}°</span>
       </div>
     </div>
   </div>
 </div>
   `;
+  }
 });
+let forecastElement = document.querySelector("#forecast");
 forecastElement.innerHTML = forecastHTML;
   } 
   
